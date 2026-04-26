@@ -1,3 +1,5 @@
+<div align="center">
+
 # AI-Powered Blog CMS
 
 ![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
@@ -9,12 +11,15 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
-> A production-grade, AI-assisted blog CMS built for small businesses that need to publish content that actually ranks — without hiring an SEO agency.
+**A production-grade, AI-assisted blog CMS built for small businesses that need to publish content that actually ranks — without hiring an SEO agency.**
+
+</div>
 
 ---
 
-<!-- SCREENSHOT: Dashboard / Blog Hub overview -->
-<!-- ![Dashboard Preview](./docs/images/dashboard.png) -->
+<div align="center">
+  <img src="image.png" alt="AI CMS Dashboard" width="100%" />
+</div>
 
 ---
 
@@ -34,7 +39,7 @@ This isn't a wrapper around WordPress. It's a lean, opinionated CMS built from s
 
 - Want to run a company blog but don't have a content team
 - Are tired of fighting WordPress plugins and theme bloat
-- Need blog content that ranks in Google *and* gets cited in AI Overviews (ChatGPT, Perplexity, Google AIO)
+- Need blog content that ranks in Google _and_ gets cited in AI Overviews (ChatGPT, Perplexity, Google AIO)
 - Want full control over their own data without paying a SaaS CMS subscription forever
 
 **Developers** building CMS solutions for clients who want:
@@ -65,6 +70,7 @@ The result: **publishable, competitive blog content in under an hour**, from som
 ## Features
 
 ### Rich Text Editor
+
 - **Tiptap v3** WYSIWYG editor with full formatting support
 - Drag-and-drop image uploads directly into the post body
 - Autosave every 30 seconds — no lost work
@@ -72,6 +78,7 @@ The result: **publishable, competitive blog content in under an hour**, from som
 - Preview mode before publishing
 
 ### AI Writing Assistant
+
 - Slide-in assistant panel powered by **Claude Haiku** via OpenRouter
 - **7 function tools** the AI can call:
   - `highlight_field` — pulses a CSS ring on any metadata field to draw attention
@@ -85,10 +92,8 @@ The result: **publishable, competitive blog content in under an hour**, from som
 - **Streaming SSE response** — the assistant thinks and types in real time
 - Quick-prompt buttons: "Score this post", "Audit my SEO", "Fix my meta description", and more
 
-<!-- SCREENSHOT: AI Assistant panel open with a score card visible -->
-<!-- ![AI Assistant](./docs/images/assistant-panel.png) -->
-
 ### SEO Out of the Box
+
 - Full **Schema.org JSON-LD** on every post (`BlogPosting`, `HowTo`, `FAQPage` — set per post)
 - **Open Graph + Twitter Card** metadata auto-populated from post fields
 - Canonical URLs on all pages
@@ -98,12 +103,14 @@ The result: **publishable, competitive blog content in under an hour**, from som
 - **Breadcrumb schema** on every individual post
 
 ### Post Management
+
 - Draft / Published workflow with status badges
 - Blog Hub dashboard with post stats at a glance
 - Delete (drafts only), Edit, Preview actions per post
 - Slug, category, author, publish date all editable
 
 ### Auth & Security
+
 - Simple `httpOnly` cookie-based session (8-hour TTL)
 - `ADMIN_PASSWORD` environment variable — no user table needed
 - Supabase **Row Level Security** enforces public read = published only
@@ -140,32 +147,29 @@ Browser
   7. Tool results returned to model → stream continues
 ```
 
-<!-- DIAGRAM: Architecture diagram image -->
-<!-- ![Architecture](./docs/images/architecture.png) -->
-
 ---
 
 ## Database Schema
 
 Single `posts` table in Supabase Postgres:
 
-| Column | Type | Description |
-|---|---|---|
-| `id` | UUID | Primary key |
-| `title` | TEXT | Post H1 |
-| `slug` | TEXT | URL segment (`/blog/[slug]`) |
-| `content` | TEXT | Tiptap HTML |
-| `meta_title` | TEXT | `<title>` tag (60 char target) |
-| `meta_description` | TEXT | Meta description (160 char target) |
-| `keywords` | TEXT[] | Target keyword array (5–10) |
-| `og_image_url` | TEXT | Hero image CDN URL |
-| `og_image_alt` | TEXT | Alt text for accessibility + SEO |
-| `category` | TEXT | Post category |
-| `author` | TEXT | Byline |
-| `schema_type` | TEXT | `BlogPosting` / `HowTo` / `FAQPage` |
-| `status` | TEXT | `draft` or `published` (CHECK constraint) |
-| `date_published` | DATE | ISO publish date |
-| `date_modified` | DATE | Auto-updated on save |
+| Column             | Type   | Description                               |
+| ------------------ | ------ | ----------------------------------------- |
+| `id`               | UUID   | Primary key                               |
+| `title`            | TEXT   | Post H1                                   |
+| `slug`             | TEXT   | URL segment (`/blog/[slug]`)              |
+| `content`          | TEXT   | Tiptap HTML                               |
+| `meta_title`       | TEXT   | `<title>` tag (60 char target)            |
+| `meta_description` | TEXT   | Meta description (160 char target)        |
+| `keywords`         | TEXT[] | Target keyword array (5–10)               |
+| `og_image_url`     | TEXT   | Hero image CDN URL                        |
+| `og_image_alt`     | TEXT   | Alt text for accessibility + SEO          |
+| `category`         | TEXT   | Post category                             |
+| `author`           | TEXT   | Byline                                    |
+| `schema_type`      | TEXT   | `BlogPosting` / `HowTo` / `FAQPage`       |
+| `status`           | TEXT   | `draft` or `published` (CHECK constraint) |
+| `date_published`   | DATE   | ISO publish date                          |
+| `date_modified`    | DATE   | Auto-updated on save                      |
 
 **RLS policy**: `SELECT` is restricted to `status = 'published'` for the anon key. Admin operations use the service role key server-side only.
 
@@ -175,40 +179,38 @@ Single `posts` table in Supabase Postgres:
 
 The AI's `score_post` tool evaluates every post on a 100-point scale:
 
-| Category | Points |
-|---|---|
-| Content Quality | 30 |
-| SEO Optimization | 25 |
-| E-E-A-T Signals | 15 |
-| Technical Elements | 15 |
-| AI Citation Readiness | 15 |
+| Category              | Points |
+| --------------------- | ------ |
+| Content Quality       | 30     |
+| SEO Optimization      | 25     |
+| E-E-A-T Signals       | 15     |
+| Technical Elements    | 15     |
+| AI Citation Readiness | 15     |
 
 **Score bands:**
+
 - 90–100: Exceptional
 - 80–89: Strong
 - 70–79: Acceptable
 - 60–69: Below Standard
 - < 60: Rewrite Required
 
-<!-- SCREENSHOT: Score card rendered in the assistant panel -->
-<!-- ![Score Card](./docs/images/score-card.png) -->
-
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | Next.js 15 (App Router) |
-| UI | React 19, Tailwind CSS 3 |
-| Editor | Tiptap v3 + custom ProseMirror extension |
-| Database | Supabase (Postgres + Row Level Security) |
-| File Storage | Supabase Storage |
-| AI Model | Claude Haiku 4.5 via OpenRouter |
-| AI Client | OpenAI SDK (OpenRouter-compatible) |
-| Auth | httpOnly cookie + Next.js Server Actions |
-| SEO | next-sitemap, Schema.org JSON-LD |
-| Deployment | Vercel |
+| Layer        | Technology                               |
+| ------------ | ---------------------------------------- |
+| Framework    | Next.js 15 (App Router)                  |
+| UI           | React 19, Tailwind CSS 3                 |
+| Editor       | Tiptap v3 + custom ProseMirror extension |
+| Database     | Supabase (Postgres + Row Level Security) |
+| File Storage | Supabase Storage                         |
+| AI Model     | Claude Haiku 4.5 via OpenRouter          |
+| AI Client    | OpenAI SDK (OpenRouter-compatible)       |
+| Auth         | httpOnly cookie + Next.js Server Actions |
+| SEO          | next-sitemap, Schema.org JSON-LD         |
+| Deployment   | Vercel                                   |
 
 ---
 
